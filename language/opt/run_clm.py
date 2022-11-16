@@ -267,7 +267,7 @@ def main():
     with barrier_context():
         if args.output_dir is not None:
             os.makedirs(args.output_dir, exist_ok=True)
-
+            logger.info(f"Rank {dist.get_rank()}: output directory is set to {args.output_dir}")
     # Get the datasets: you can either provide your own CSV/JSON/TXT training and evaluation files (see below)
     # or just provide the name of one of the public datasets available on the hub at https://huggingface.co/datasets/
     # (the dataset will be downloaded automatically from the datasets Hub).
