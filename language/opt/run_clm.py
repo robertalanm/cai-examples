@@ -367,11 +367,11 @@ def main():
     # enable graident checkpointing
     model.gradient_checkpointing_enable()
 
-    chunk_size = ChunkManager.search_chunk_size(model, 64 * 1024 ** 2, 32)
-    pg = ProcessGroup()
+    # chunk_size = ChunkManager.search_chunk_size(model, 64 * 1024 ** 2, 32)
+    config = {2: dict(chunk_size=128)}
+    # pg = ProcessGroup()
     placement_policy = 'auto'
-    chunk_manager = ChunkManager(chunk_size, process_group=pg,
-                                 enable_distributed_storage=True,
+    chunk_manager = ChunkManager(config
                                  init_device=GeminiManager.get_default_device(placement_policy))
     gemini_manager = GeminiManager(placement_policy, chunk_manager)
     model = ZeroDDP(model, gemini_manager)
