@@ -371,7 +371,7 @@ def main():
     config = {2: dict(chunk_size=128)}
     # pg = ProcessGroup()
     placement_policy = 'auto'
-    chunk_manager = ChunkManager(config
+    chunk_manager = ChunkManager(config,
                                  init_device=GeminiManager.get_default_device(placement_policy))
     gemini_manager = GeminiManager(placement_policy, chunk_manager)
     model = ZeroDDP(model, gemini_manager)
